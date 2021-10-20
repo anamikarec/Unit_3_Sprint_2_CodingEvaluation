@@ -53,8 +53,12 @@
        <a href="home.html">Home</a>
     </div>
     <h1>Home Page</h1>
+    <div id="pagination">
+
+    </div>
     <input type="text" placeholder="Search for user.." id="search">
     <button id = "submit">Submit</button>
+    <div id="container"></div>
 </body>
 <script>
 window.addEventListener("load",()=>{
@@ -62,10 +66,91 @@ window.addEventListener("load",()=>{
     btn.addEventListener("click",handleCall);
 })
 
-const handleCall = ()=>{
+//const inp = document.getElementById('search').value;
+const handleCall = async() => {
     var res = JSON.parse(localStorage.getItem("userId"));
     // console.log(res);
     // console.log(res.name);
+    var res  = await fetch(`https://api.github.com/users/anamikarec/repos`);
+    var res = await res.json();
+    console.log(res);
+
+    //createPageButtons(res);
+    createCards(res)
+
+}
+var start = 0;
+var end = 10;
+var cont = document.getElementById('container');
+function createCards(res){
+for(let i=0;i<res.length;i++){
+    var data = res[i];
+    //console.log(data);
+    var div1 = document.createElement('div');
+    div1.innerHTML = `UserName : anamikarec`;
+
+    var div2 = document.createElement('div');
+    div2.innerHTML = `UserRepoName : ${data.full_name}`;
+
+    var div3 = document.createElement('div');
+    div3.innerHTML = `DefaultBranch : ${data.default_branch}`;
+
+    var div = document.createElement('div');
+    div.append(div1,div2,div3);
+    div.style.border = '5px solid grey'
+    div.style.margin = '50px'
+    div.style.padding = '20px'
+    div.style.height = '100px'
+    div.style.width = '400px'
+    div.style.backgroundColor = "black";
+    div.style.color = "white";
+    cont.append(div);
+    cont.style.marginLeft = "40px";
+    cont.style.marginTop = "40px";
+    cont.style.width = "600px";
+    cont.style.backgroundColor = "cornsilk";
+    cont.style.border = "5px solid grey";
+}
+
+const paginationDiv = document.getElementById("pagination");
+
+    function createPageButtons(res) {
+      const previous = document.createElement("button");
+      previous.textContent = "Prev";
+      previous.addEventListener("click", () => {
+        if (end === 10) {
+          alert("Previous button has been disabled");
+        } else {
+          start -= 10;
+          end -= 10;
+          createCards(res)
+        }
+      });
+
+      const current = document.createElement("button");
+      current.textContent = "Current";
+      current.addEventListener("click", () => {
+        start = start;
+        end = end;
+        createCards(res);
+      });
+
+      const next = document.createElement("button");
+      next.textContent = "Next";
+      next.addEventListener("click", () => {
+        if (product.length === product.length - 1) {
+             alert("Next button has been disabled")
+        } 
+        else {
+          start += 10;
+          end += 10;
+          console.log(start, end);
+          createCards(res);
+        }
+      });
+
+      paginationDiv.append(previous, current, next);
+    }
 
 }
 </script>
