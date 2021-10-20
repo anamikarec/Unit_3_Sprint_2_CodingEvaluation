@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        #nav{
+            margin: 10px;
+            padding: 20px;
+            background-color: black;
+            
+        }
+        #nav a{
+            text-decoration: none;
+            color: white;
+            padding: 80px;
+        }
+        h1{
+            margin: 30px;
+        }
+        /* }
+        #login{
+            margin: 10px;
+            padding: 20px;
+            width: 100%;
+        } */
+         input{
+            width:90%;
+            height: 30px;
+            margin: 10px;
+            padding: 10px;
+            font-size:20px;
+            border: 1px solid black;
+            border-radius: 10px;
+            background-color: whitesmoke;
+        }
+        #submit{
+            width:90%;
+            height: 40px;
+            margin-left: 10px;
+            font-size:20px;
+            border: 1px solid black;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <body>
+        <div id="nav">
+       <a href="login.html">Login</a>
+       <a href="home.html">Home</a>
+    </div>
+    <h1>Home Page</h1>
+    <input type="text" placeholder="Search for user.." id="search">
+    <button id = "submit">Submit</button>
+</body>
+<script>
+window.addEventListener("load",()=>{
+    const btn = document.getElementById('submit');
+    btn.addEventListener("click",handleCall);
+})
+
+const handleCall = ()=>{
+    var res = JSON.parse(localStorage.getItem("userId"));
+    // console.log(res);
+    // console.log(res.name);
+
+}
+</script>
+</html>
