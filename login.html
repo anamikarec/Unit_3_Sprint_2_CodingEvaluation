@@ -17,6 +17,32 @@
             color: white;
             padding: 80px;
         }
+        h1{
+            margin: 30px;
+        }
+        #login{
+            margin: 10px;
+            padding: 20px;
+            width: 100%;
+        }
+        input{
+            width:90%;
+            height: 30px;
+            margin: 10px;
+            padding: 10px;
+            font-size:20px;
+            border: 1px solid black;
+            border-radius: 10px;
+            background-color: whitesmoke;
+        }
+        #submit{
+            width:90%;
+            height: 40px;
+            margin-left: 10px;
+            font-size:20px;
+            border: 1px solid black;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
@@ -24,5 +50,28 @@
    <a href="login.html">Login</a>
    <a href="home.html">Home</a>
 </div>
+<h1>Login Page</h1>
+<!-- <div id="login"> -->
+    <input type="text" id="username" placeholder="Type your username.." id="name">
+    <input type="password" id="password" placeholder="Type your password.." id="password">
+    <button id="submit">Submit</button>
+<!-- </div> -->
 </body>
+<script type="text/javascript">
+    window.addEventListener("load",()=>{
+        const btn = document.getElementById('submit');
+        btn.addEventListener("click",handleSubmit);
+    })
+
+   const handleSubmit = ()=>{
+    const name = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const payload = {name,password};
+    localStorage.setItem("userId",JSON.stringify(payload));
+    // var res = JSON.parse(localStorage.getItem("userId"));
+    // console.log(res);
+    window.location.replace("home.html")
+
+   }
+</script>
 </html>
